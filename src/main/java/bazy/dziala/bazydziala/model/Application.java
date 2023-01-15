@@ -17,12 +17,12 @@ import java.time.LocalDate;
 @Table(name = "application")
 public class Application extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "personal_data_id",
                 referencedColumnName = "id")
     private PersonalData personalData;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "address_id",
                 nullable = false)
     private Address address;
@@ -40,7 +40,7 @@ public class Application extends BaseEntity {
             nullable = false)
     private String justification;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "submitting_user",
                 nullable = false)
     private User submittingUser;

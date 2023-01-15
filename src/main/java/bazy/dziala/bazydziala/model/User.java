@@ -30,7 +30,7 @@ public class User extends BaseEntity {
     @Column(name = "role",
             nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role = Role.employee;
+    private Role role;
 
     @JsonIgnore
     @OneToMany(mappedBy = "submittingUser",

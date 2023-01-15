@@ -30,16 +30,17 @@ public class ApplicationController {
 
     @PutMapping(path = "/update", consumes="application/json")
     public ResponseEntity<Application> updateUser(@RequestBody Application application){
+        System.out.println(application);
         return ResponseEntity.ok(applicationService.updateApplication(application));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
     public ResponseEntity<Application> createUser(@RequestBody Application application){
-        System.out.println(application.getAddress());
+        System.out.println(application);
         return ResponseEntity.ok(applicationService.createApplication(application));
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteUser(@RequestBody @PathVariable("id") Long id){
         return ResponseEntity.ok(applicationService.deleteApplication(id));
     }

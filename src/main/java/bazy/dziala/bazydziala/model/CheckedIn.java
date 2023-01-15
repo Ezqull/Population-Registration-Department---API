@@ -15,17 +15,17 @@ import java.time.LocalDate;
 @Table(name = "checked_in")
 public class CheckedIn extends BaseEntity {
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "personal_data_id",
                 nullable = false)
     private PersonalData personalData;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "old_address",
                 nullable = true)
     private Address oldAddress;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "new_address",
                 nullable = false)
     private Address newAddress;

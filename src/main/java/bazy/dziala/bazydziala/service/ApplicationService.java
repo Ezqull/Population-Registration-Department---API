@@ -27,15 +27,7 @@ public class ApplicationService {
     }
 
     public Application updateApplication(Application application){
-        Optional<Application> found = applicationRepository.findById(application.getId());
-        Application newApplication = found.orElseThrow();
-        newApplication.setPersonalData(application.getPersonalData());
-        newApplication.setAddress(application.getAddress());
-        newApplication.setDateOfApplication(application.getDateOfApplication());
-        newApplication.setResult(application.getResult());
-        newApplication.setJustification(application.getJustification());
-        newApplication.setSubmittingUser(application.getSubmittingUser());
-        return applicationRepository.save(newApplication);
+        return applicationRepository.save(application);
     }
     public Application createApplication(Application application){
         return applicationRepository.saveAndFlush(application);

@@ -56,7 +56,7 @@ public class PersonalData extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "personalData",
-               cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+               cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     private List<CheckedIn> checkIns = new ArrayList<>();
 
     @JsonIgnore

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS address (
     street VARCHAR(50) NOT NULL,
     city VARCHAR(30) NOT NULL,
     state VARCHAR(20) NOT NULL,
-    postal_code CHAR(5) NOT NULL,
+    postal_code VARCHAR(5) NOT NULL,
     country VARCHAR(20) NOT NULL,
     PRIMARY KEY (Id)
 );
@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS personal_data (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    personal_id CHAR(11) NOT NULL,
-    passport_id CHAR(9) NOT NULL,
+    personal_id VARCHAR(11) NOT NULL,
+    passport_id VARCHAR(9) NOT NULL,
     birth_date DATE NOT NULL,
     fathers_name VARCHAR(20) NOT NULL,
     mothers_name VARCHAR(20) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS users(
     id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(75) NOT NULL,
     password VARCHAR(50) NOT NULL,
-    role enum ('admin', 'employee', 'applicant') NOT NULL,
+    role ENUM('EMPLOYEE', 'USER') NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS application(
     personal_data_id INT NOT NULL,
     address_id INT NOT NULL,
     date_of_application  DATE NOT NULL,
-    result enum ('positive', 'negative') NOT NULL,
+    result ENUM('POSITIVE', 'NEGATIVE') NOT NULL,
     justification VARCHAR(100) NOT NULL,
     submitting_user INT NOT NULL,
     PRIMARY KEY (id),

@@ -24,7 +24,6 @@ public class Address extends BaseEntity{
     private String street;
 
     @Column(name = "city",
-            nullable = false,
             length = 30)
     private String city;
 
@@ -35,7 +34,8 @@ public class Address extends BaseEntity{
 
     @Column(name = "postal_code",
             nullable = false,
-            length = 5)
+            length = 5,
+            columnDefinition = "VARCHAR(5)")
     private String postalCode;
 
     @Column(name = "country",
@@ -55,7 +55,7 @@ public class Address extends BaseEntity{
 
     @JsonIgnore
     @OneToMany(mappedBy = "address",
-            cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+               cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private List<Application> applications = new ArrayList<>();
 
 }

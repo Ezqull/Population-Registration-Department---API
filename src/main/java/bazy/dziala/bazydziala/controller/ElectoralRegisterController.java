@@ -39,7 +39,7 @@ public class ElectoralRegisterController {
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteUser(@RequestBody @PathVariable("id") Long id){
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
         return ResponseEntity.ok(electoralRegisterService.deleteElectoralRegister(id));
     }
 }

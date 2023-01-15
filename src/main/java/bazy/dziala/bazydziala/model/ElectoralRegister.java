@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Table(name = "electoral_register")
 public class ElectoralRegister extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "personal_data_id",
                 referencedColumnName = "id")
     private PersonalData personalData;
