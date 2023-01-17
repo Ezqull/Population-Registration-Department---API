@@ -8,11 +8,11 @@
         <version>3.0.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>bazy.dziala</groupId>
-    <artifactId>bazydziala</artifactId>
+    <groupId>bazy.projekt</groupId>
+    <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bazydziala</name>
-    <description>bazydziala</description>
+    <name>app</name>
+    <description>app</description>
     <properties>
         <java.version>17</java.version>
     </properties>
