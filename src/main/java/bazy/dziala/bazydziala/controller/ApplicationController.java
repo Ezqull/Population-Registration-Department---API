@@ -38,6 +38,11 @@ public class ApplicationController {
         return ResponseEntity.ok(applicationService.getAllNegative());
     }
 
+    @GetMapping(path = "/getAllWaiting")
+    public ResponseEntity<List<Application>> getAllWaitingApplications(){
+        return ResponseEntity.ok(applicationService.getAllWaiting());
+    }
+
     @GetMapping(path = "/getAllForUser/{id}")
     public ResponseEntity<List<Application>> getAllNegativeApplications(@PathVariable("id") Long id){
         return ResponseEntity.ok(applicationService.getAllApplicationsForUser(id));

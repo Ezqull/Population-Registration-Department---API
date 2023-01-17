@@ -30,8 +30,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @GetMapping(path = "/getByEmail", consumes="application/json")
-    public ResponseEntity<User> getByEmail(@RequestBody String email){
+    @GetMapping(path = "/getByEmail/{email}")
+    public ResponseEntity<User> getByEmail(@PathVariable("email") String email){
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
@@ -41,13 +41,12 @@ public class UserController {
     }
 
     @PostMapping(path = "/create", consumes="application/json")
-    public ResponseEntity<String> createUser(@RequestBody User user){
-        userService.createUser(user);
-        return ResponseEntity.ok("Stworzono usera");
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        return ResponseEntity.ok(userService.createUser(user));
     }
 
-    @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteUser(@RequestBody @PathVariable("id") Long id){
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 }

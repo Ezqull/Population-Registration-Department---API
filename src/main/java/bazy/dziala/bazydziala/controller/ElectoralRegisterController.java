@@ -29,13 +29,13 @@ public class ElectoralRegisterController {
         return ResponseEntity.ok(electoralRegisterService.getAll());
     }
 
-    @GetMapping(path = "/getAllAfter")
-    public ResponseEntity<List<ElectoralRegister>> getAllRegisteredAfter(@RequestBody LocalDate date){
+    @GetMapping(path = "/getAllAfterDate/{date}")
+    public ResponseEntity<List<ElectoralRegister>> getAllRegisteredAfter(@PathVariable("date") LocalDate date){
         return ResponseEntity.ok(electoralRegisterService.getAllAfterDate(date));
     }
 
-    @GetMapping(path = "/getAllBefore")
-    public ResponseEntity<List<ElectoralRegister>> getAllRegisteredBefore(@RequestBody LocalDate date){
+    @GetMapping(path = "/getAllBeforeDate/{date}")
+    public ResponseEntity<List<ElectoralRegister>> getAllRegisteredBefore(@PathVariable("date") LocalDate date){
         return ResponseEntity.ok(electoralRegisterService.getAllBeforeDate(date));
     }
 
@@ -46,10 +46,10 @@ public class ElectoralRegisterController {
 
     @PostMapping(path = "/create", consumes="application/json")
     public ResponseEntity<ElectoralRegister> createRegistered(@RequestBody ElectoralRegister electoralRegister){
-        return ResponseEntity.ok(electoralRegisterService.createRegister(electoralRegister));
+        return ResponseEntity.ok(electoralRegisterService.createRegister(electoralRegister, electoralRegister.getPersonalData().getId()));
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteRegistered(@PathVariable("id") Long id){
         return ResponseEntity.ok(electoralRegisterService.deleteElectoralRegister(id));
     }

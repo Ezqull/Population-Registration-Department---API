@@ -25,6 +25,12 @@ public class ApplicationService {
         return applicationRepository.findAll();
     }
 
+    public List<Application> getAllWaiting(){
+        return applicationRepository.findAll().stream()
+                .filter(n -> n.getResult() == null)
+                .collect(Collectors.toList());
+    }
+
     public List<Application> getAllPositive(){
         return applicationRepository.findAll().stream()
                 .filter(n -> n.getResult() == Result.POSITIVE)

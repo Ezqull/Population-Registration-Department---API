@@ -3,24 +3,25 @@ package bazy.dziala.bazydziala.service;
 
 import bazy.dziala.bazydziala.model.CheckedIn;
 import bazy.dziala.bazydziala.model.ElectoralRegister;
+import bazy.dziala.bazydziala.model.PersonalData;
 import bazy.dziala.bazydziala.repository.ElectoralRegisterRepository;
+import bazy.dziala.bazydziala.repository.PersonalDataRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ElectoralRegisterService {
 
     private final ElectoralRegisterRepository electoralRegisterRepository;
-
-    @Autowired
-    public ElectoralRegisterService(ElectoralRegisterRepository electoralRegisterRepository) {
-        this.electoralRegisterRepository = electoralRegisterRepository;
-    }
+    private final PersonalDataRepository personalDataRepository;
 
     public List<ElectoralRegister> getAll(){
         return electoralRegisterRepository.findAll();
@@ -47,8 +48,12 @@ public class ElectoralRegisterService {
         return electoralRegisterRepository.saveAndFlush(electoralRegister);
     }
 
-    public ElectoralRegister createRegister(ElectoralRegister electoralRegister){
-        return electoralRegisterRepository.saveAndFlush(electoralRegister);
+    public ElectoralRegister createRegister(ElectoralRegister electoralRegister, Long id){
+        int yearsDifference = Period.between(personalDataRepository.findById(id).orElseThrow().getBirthDate(), LocalDate.now()).getYears();
+        if(yearsDifference >= 18)
+            return electoralRegisterRepository.saveAndFlush(electoralRegister);
+
+        return null;
     }
 
     public String deleteElectoralRegister(Long id){

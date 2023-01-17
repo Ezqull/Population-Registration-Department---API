@@ -31,13 +31,11 @@ public class Application extends BaseEntity {
             nullable = false)
     private LocalDate dateOfApplication;
 
-    @Column(name = "result",
-            nullable = false)
+    @Column(name = "result")
     @Enumerated(EnumType.STRING)
     private Result result;
 
-    @Column(name = "justification",
-            nullable = false)
+    @Column(name = "justification")
     private String justification;
 
     @ManyToOne

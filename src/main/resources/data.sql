@@ -12,11 +12,11 @@ VALUES
 INSERT INTO
     personal_data(name, last_name, personal_id, passport_id, birth_date, fathers_name, mothers_name)
 VALUES
-    ("Marcin"   , "Kowal"       , "00210212345", "AA1234567", "2000-01-02"  , "Jan"         , "Beata"),
+    ("Marcin"   , "Kowal"       , "00210212345", "AA1234567", "2008-01-02"  , "Jan"         , "Beata"),
     ("Jan"      , "Kowal"       , "78292212345", "AA1234568", "1978-09-22"  , "Dawid"       , "Urszula"),
     ("Magda"    , "Nowak"       , "88252112345", "AA1234569", "1988-05-21"  , "Michal"      , "Anna"),
-    ("Anna"     , "Szpak"       , "04261412345", "AA1234570", "2004-06-14"  , "Maciej"      , "Ala"),
-    ("Konrad"   , "Szewc"       , "93250312345", "AA1234571", "1993-05-0"   , "Maksymilian" , "Kasia"),
+    ("Anna"     , "Szpak"       , "04261412345", "AA1234570", "2007-06-14"  , "Maciej"      , "Ala"),
+    ("Konrad"   , "Szewc"       , "93250312345", "AA1234571", "1993-05-01"   , "Maksymilian" , "Kasia"),
     ("Agnieszka", "Wolc"        , "87220112345", "AA1234572", "1987-02-01"  , "Patryk"      , "Anna"),
     ("Anna"     , "Wesołowska"  , "98273012345", "AA1234573", "1998-07-30"  , "Michal"      , "Marja");
 
@@ -34,25 +34,21 @@ VALUES
 INSERT INTO
     electoral_register(personal_data_id, date_of_receipt_of_voting_rights, constituency)
 VALUES
-    (1,"2018-01-02","Województwo dolnośląskie - Okręg wyborczy nr  1  (Legnica)"),
-    (2,"1996-09-22","Województwo dolnośląskie - Okręg wyborczy nr  2  (Wałbrzych)"),
-    (3,"2006-05-21","Województwo dolnośląskie - Okręg wyborczy nr  3  (Wrocław)"),
-    (4,"2022-06-14","Województwo dolnośląskie - Okręg wyborczy nr  1  (Legnica)"),
-    (5,"2011-05-0" ,"Województwo dolnośląskie - Okręg wyborczy nr  3  (Wrocław)"),
-    (6,"2005-02-01","Województwo dolnośląskie - Okręg wyborczy nr  1  (Legnica)"),
-    (7,"2016-07-30","Województwo dolnośląskie - Okręg wyborczy nr  2  (Wałbrzych)");
+    (2,"1996-09-22","Województwo dolnośląskie - Okręg wyborczy nr  1  (Legnica)"),
+    (3,"2006-05-21","Województwo dolnośląskie - Okręg wyborczy nr  2  (Wałbrzych)"),
+    (5,"2011-05-21","Województwo dolnośląskie - Okręg wyborczy nr  3  (Wrocław)"),
+    (6,"2005-02-01","Województwo dolnośląskie - Okręg wyborczy nr  1  (Legnica)");
 
 INSERT INTO
     users(email, password, role)
 VALUES
-    ("maciejnowak1983@wp.pl"        , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
-    ("maciejnowak1983@onet.pl"      , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "EMPLOYEE"),
-    ("kamilBorowski1983@gmaile.com" , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "EMPLOYEE"),
-    ("polskagola1983@wp.pl"         , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
-    ("szymonkrawczyk1983@wp.pl"     , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
-    ("jakubciecira1983@wp.pl"       , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
-    ("aleksandradobosz1983@wp.pl"   , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER");
-
+    ("maciejnowak1983@wp.pl"        , "1234", "USER"),
+    ("maciejnowak1983@onet.pl"      , "1234", "EMPLOYEE"),
+    ("kamilBorowski1983@gmaile.com" , "1234", "EMPLOYEE"),
+    ("polskagola1983@wp.pl"         , "1234", "USER"),
+    ("szymonkrawczyk1983@wp.pl"     , "1234", "USER"),
+    ("jakubciecira1983@wp.pl"       , "1234", "USER"),
+    ("aleksandradobosz1983@wp.pl"   , "1234", "USER");
 
 INSERT INTO
     application (personal_data_id, address_id, date_of_application, result, justification, submitting_user)

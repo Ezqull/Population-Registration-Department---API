@@ -31,7 +31,7 @@ public class PersonalDataService {
 
     public List<PersonalData> getByLastName(String lastName){
         return personalDataRepository.findAll().stream()
-                .filter(n -> n.getLastName() == lastName)
+                .filter(n -> n.getLastName().equals(lastName))
                 .collect(Collectors.toList());
     }
 

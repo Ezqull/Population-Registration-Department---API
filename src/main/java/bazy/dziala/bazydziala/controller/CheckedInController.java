@@ -30,13 +30,13 @@ public class CheckedInController {
         return ResponseEntity.ok(checkedInService.getAll());
     }
 
-    @GetMapping(path = "/getAllAfterDate")
-    public ResponseEntity<List<CheckedIn>> getAllCheckedInAfter(@RequestBody LocalDate date){
+    @GetMapping(path = "/getAllAfterDate/{date}")
+    public ResponseEntity<List<CheckedIn>> getAllCheckedInAfter(@PathVariable("date") LocalDate date){
         return ResponseEntity.ok(checkedInService.getAllAfterDate(date));
     }
 
-    @GetMapping(path = "/getAllBeforeDate")
-    public ResponseEntity<List<CheckedIn>> getAllCheckedInBefore(@RequestBody LocalDate date){
+    @GetMapping(path = "/getAllBeforeDate/{date}")
+    public ResponseEntity<List<CheckedIn>> getAllCheckedInBefore(@PathVariable("date") LocalDate date){
         return ResponseEntity.ok(checkedInService.getAllBeforeDate(date));
     }
 
@@ -50,8 +50,8 @@ public class CheckedInController {
         return ResponseEntity.ok(checkedInService.createData(checkedIn));
     }
 
-    @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteCheckedIn(@RequestBody @PathVariable("id") Long id){
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteCheckedIn(@PathVariable("id") Long id){
         return ResponseEntity.ok(checkedInService.deleteCheckedIn(id));
     }
 }

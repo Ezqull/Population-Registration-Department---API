@@ -30,18 +30,18 @@ public class PersonalDataController {
         return ResponseEntity.ok(personalDataService.getAll());
     }
 
-    @GetMapping(path = "/getAllByLastName")
-    public ResponseEntity<List<PersonalData>> getAllByLastName(@RequestBody String lastName){
+    @GetMapping(path = "/getAllByLastName/{lastName}")
+    public ResponseEntity<List<PersonalData>> getAllByLastName(@PathVariable("lastName") String lastName){
         return ResponseEntity.ok(personalDataService.getByLastName(lastName));
     }
 
-    @GetMapping(path = "/getAllByPersonalId")
-    public ResponseEntity<PersonalData> getAllByPersonalId(@RequestBody String personalId){
+    @GetMapping(path = "/getAllByPersonalId/{personalId}")
+    public ResponseEntity<PersonalData> getAllByPersonalId(@PathVariable("personalId") String personalId){
         return ResponseEntity.ok(personalDataService.getDataByPersonalid(personalId));
     }
 
-    @GetMapping(path = "/getAllByPassport")
-    public ResponseEntity<PersonalData> getAllByPassportId(@RequestBody String passportId){
+    @GetMapping(path = "/getAllByPassportId/{passportId}")
+    public ResponseEntity<PersonalData> getAllByPassportId(@PathVariable("passportId") String passportId){
         return ResponseEntity.ok(personalDataService.getDataByPassportId(passportId));
     }
 
@@ -55,7 +55,7 @@ public class PersonalDataController {
         return ResponseEntity.ok(personalDataService.createData(personalData));
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteData(@PathVariable("id") Long id){
         return ResponseEntity.ok(personalDataService.deletePersonalData(id));
     }
