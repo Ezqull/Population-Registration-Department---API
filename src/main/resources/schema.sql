@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS electoral_register (
 CREATE TABLE IF NOT EXISTS users(
     id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(75) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(256) NOT NULL,
     role ENUM('EMPLOYEE', 'USER') NOT NULL,
     PRIMARY KEY (id)
 );

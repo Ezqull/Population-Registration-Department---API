@@ -19,29 +19,44 @@ public class ApplicationController {
 
     @GetMapping(path = "/{id}")
     @ResponseBody
-    public ResponseEntity<Application> getUserById(@RequestBody @PathVariable("id") Long id){
+    public ResponseEntity<Application> getApplicationById(@PathVariable("id") Long id){
         return ResponseEntity.ok(applicationService.getById(id));
     }
 
     @GetMapping(path = "/getAll")
-    public ResponseEntity<List<Application>> getAllUsers(){
+    public ResponseEntity<List<Application>> getAllApplications(){
         return ResponseEntity.ok(applicationService.getAll());
     }
 
+    @GetMapping(path = "/getAllPositive")
+    public ResponseEntity<List<Application>> getAllPositiveApplications(){
+        return ResponseEntity.ok(applicationService.getAllPositive());
+    }
+
+    @GetMapping(path = "/getAllNegative")
+    public ResponseEntity<List<Application>> getAllNegativeApplications(){
+        return ResponseEntity.ok(applicationService.getAllNegative());
+    }
+
+    @GetMapping(path = "/getAllForUser/{id}")
+    public ResponseEntity<List<Application>> getAllNegativeApplications(@PathVariable("id") Long id){
+        return ResponseEntity.ok(applicationService.getAllApplicationsForUser(id));
+    }
+
     @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<Application> updateUser(@RequestBody Application application){
+    public ResponseEntity<Application> updateApplication(@RequestBody Application application){
         System.out.println(application);
         return ResponseEntity.ok(applicationService.updateApplication(application));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
-    public ResponseEntity<Application> createUser(@RequestBody Application application){
+    public ResponseEntity<Application> createApplication(@RequestBody Application application){
         System.out.println(application);
         return ResponseEntity.ok(applicationService.createApplication(application));
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteUser(@RequestBody @PathVariable("id") Long id){
+    public ResponseEntity<String> deleteApplication(@RequestBody @PathVariable("id") Long id){
         return ResponseEntity.ok(applicationService.deleteApplication(id));
     }
 }

@@ -1,7 +1,6 @@
 package bazy.dziala.bazydziala.controller;
 
 import bazy.dziala.bazydziala.model.Address;
-import bazy.dziala.bazydziala.model.User;
 import bazy.dziala.bazydziala.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,8 @@ public class AddressController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Address> getUserById(@PathVariable("id") Long id){
+    public ResponseEntity<Address> getAddressById(@PathVariable("id") Long id){
+
         return ResponseEntity.ok(addressService.getById(id));
     }
 
@@ -30,18 +30,19 @@ public class AddressController {
         return ResponseEntity.ok(addressService.getAll());
     }
 
+
     @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<Address> updateUser(@RequestBody Address address){
+    public ResponseEntity<Address> updateAddress(@RequestBody Address address){
         return ResponseEntity.ok(addressService.updateAddress(address));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
-    public ResponseEntity<Address> createUser(@RequestBody Address address){
+    public ResponseEntity<Address> createAddress(@RequestBody Address address){
         return ResponseEntity.ok(addressService.createAddress(address));
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteUser(@RequestBody @PathVariable("id") Long id){
+    public ResponseEntity<String> deleteAddress(@PathVariable("id") Long id){
         return ResponseEntity.ok(addressService.deleteAddress(id));
     }
 }

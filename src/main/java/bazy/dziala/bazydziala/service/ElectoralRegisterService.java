@@ -1,13 +1,16 @@
 package bazy.dziala.bazydziala.service;
 
 
+import bazy.dziala.bazydziala.model.CheckedIn;
 import bazy.dziala.bazydziala.model.ElectoralRegister;
 import bazy.dziala.bazydziala.repository.ElectoralRegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ElectoralRegisterService {
@@ -21,6 +24,18 @@ public class ElectoralRegisterService {
 
     public List<ElectoralRegister> getAll(){
         return electoralRegisterRepository.findAll();
+    }
+
+    public List<ElectoralRegister> getAllAfterDate(LocalDate date){
+        return electoralRegisterRepository.findAll().stream()
+                .filter(n -> n.getDateOfReceipt().isAfter(date))
+                .collect(Collectors.toList());
+    }
+
+    public List<ElectoralRegister> getAllBeforeDate(LocalDate date){
+        return electoralRegisterRepository.findAll().stream()
+                .filter(n -> n.getDateOfReceipt().isBefore(date))
+                .collect(Collectors.toList());
     }
 
     public ElectoralRegister getById(Long id){

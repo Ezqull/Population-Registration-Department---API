@@ -6,6 +6,7 @@ import bazy.dziala.bazydziala.service.CheckedInService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -20,27 +21,37 @@ public class CheckedInController {
 
     @GetMapping(path = "/{id}")
     @ResponseBody
-    public ResponseEntity<CheckedIn> getUserById(@RequestBody @PathVariable("id") Long id){
+    public ResponseEntity<CheckedIn> getCheckedInById(@PathVariable("id") Long id){
         return ResponseEntity.ok(checkedInService.getById(id));
     }
 
     @GetMapping(path = "/getAll")
-    public ResponseEntity<List<CheckedIn>> getAllUsers(){
+    public ResponseEntity<List<CheckedIn>> getAllCheckedIn(){
         return ResponseEntity.ok(checkedInService.getAll());
     }
 
+    @GetMapping(path = "/getAllAfterDate")
+    public ResponseEntity<List<CheckedIn>> getAllCheckedInAfter(@RequestBody LocalDate date){
+        return ResponseEntity.ok(checkedInService.getAllAfterDate(date));
+    }
+
+    @GetMapping(path = "/getAllBeforeDate")
+    public ResponseEntity<List<CheckedIn>> getAllCheckedInBefore(@RequestBody LocalDate date){
+        return ResponseEntity.ok(checkedInService.getAllBeforeDate(date));
+    }
+
     @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<CheckedIn> updateUser(@RequestBody CheckedIn checkedIn){
+    public ResponseEntity<CheckedIn> updateCheckedIn(@RequestBody CheckedIn checkedIn){
         return ResponseEntity.ok(checkedInService.updateData(checkedIn));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
-    public ResponseEntity<CheckedIn> createUser(@RequestBody CheckedIn checkedIn){
+    public ResponseEntity<CheckedIn> createCheckedIn(@RequestBody CheckedIn checkedIn){
         return ResponseEntity.ok(checkedInService.createData(checkedIn));
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteUser(@RequestBody @PathVariable("id") Long id){
+    public ResponseEntity<String> deleteCheckedIn(@RequestBody @PathVariable("id") Long id){
         return ResponseEntity.ok(checkedInService.deleteCheckedIn(id));
     }
 }

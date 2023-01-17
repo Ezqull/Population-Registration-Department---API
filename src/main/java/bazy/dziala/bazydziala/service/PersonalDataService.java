@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonalDataService {
@@ -26,6 +27,12 @@ public class PersonalDataService {
 
     public PersonalData getById(Long id){
         return personalDataRepository.findById(id).orElseThrow();
+    }
+
+    public List<PersonalData> getByLastName(String lastName){
+        return personalDataRepository.findAll().stream()
+                .filter(n -> n.getLastName() == lastName)
+                .collect(Collectors.toList());
     }
 
     public PersonalData getDataByPersonalid(String personalId){

@@ -36,4 +36,11 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "submittingUser",
             cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private List<Application> applications = new ArrayList<>();
+
+    public User(String email, String password, Role role) {
+        super();
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 }

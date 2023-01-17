@@ -45,18 +45,19 @@ VALUES
 INSERT INTO
     users(email, password, role)
 VALUES
-    ("maciejnowak1983@wp.pl"        , "1234", "USER"),
-    ("maciejnowak1983@onet.pl"      , "1235", "EMPLOYEE"),
-    ("kamilBorowski1983@gmaile.com" , "1236", "EMPLOYEE"),
-    ("polskagola1983@wp.pl"         , "1237", "USER"),
-    ("szymonkrawczyk1983@wp.pl"     , "1238", "USER"),
-    ("jakubciecira1983@wp.pl"       , "1239", "USER"),
-    ("aleksandradobosz1983@wp.pl"   , "1230", "USER");
+    ("maciejnowak1983@wp.pl"        , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
+    ("maciejnowak1983@onet.pl"      , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "EMPLOYEE"),
+    ("kamilBorowski1983@gmaile.com" , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "EMPLOYEE"),
+    ("polskagola1983@wp.pl"         , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
+    ("szymonkrawczyk1983@wp.pl"     , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
+    ("jakubciecira1983@wp.pl"       , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER"),
+    ("aleksandradobosz1983@wp.pl"   , "$2a$10$3MmHMVzGlU5InkUteEGqiOd8HDizgHH5zNjvQYjvRxFNZV1rDh21C", "USER");
+
 
 INSERT INTO
     application (personal_data_id, address_id, date_of_application, result, justification, submitting_user)
 VALUES
-    (1, 1, "2018-01-02", "POSITIVE", "essa", 1),
-    (2, 2, "2018-01-02", "POSITIVE", "essa", 1),
-    (3, 3, "2018-01-02", "POSITIVE", "essa", 1),
-    (4, 3, "2018-01-02", "NEGATIVE", "essa", 1);
+    (1, 1, "2018-01-02", "POSITIVE", "Every field is correctly filled", 1),
+    (2, 2, "2018-01-02", "POSITIVE", "Every field is correctly filled", 1),
+    (3, 3, "2018-01-02", "POSITIVE", "Every field is correctly filled", 2),
+    (4, 3, "2018-01-02", "NEGATIVE", "Personal id field is too short" , 1);
