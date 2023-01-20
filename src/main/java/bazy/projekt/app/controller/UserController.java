@@ -3,6 +3,7 @@ package bazy.projekt.app.controller;
 import bazy.projekt.app.model.User;
 import bazy.projekt.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,18 +36,19 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
-    @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<User> updateUser(@RequestBody User user){
+    @PutMapping(path = "/update/{id}", consumes="application/json")
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("id") Long id){
+        user.setId(id);
         return ResponseEntity.ok(userService.updateUser(user));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
     public ResponseEntity<User> createUser(@RequestBody User user){
-        return ResponseEntity.ok(userService.createUser(user));
+        return new ResponseEntity(userService.createUser(user), HttpStatusCode.valueOf(201));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
-        return ResponseEntity.ok(userService.deleteUser(id));
+        return new ResponseEntity(userService.deleteUser(id), HttpStatusCode.valueOf(204));
     }
 }

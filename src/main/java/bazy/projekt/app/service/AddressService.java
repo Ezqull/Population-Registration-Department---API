@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AddressService {
@@ -24,6 +25,7 @@ public class AddressService {
 
     public Address getById(Long id){
         return addressRepository.findById(id).orElseThrow();
+
     }
 
     public Address updateAddress(Address address){

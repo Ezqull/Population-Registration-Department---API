@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class ApplicationService {
 
+    private static final String NO_SUCH_USER = "No user with this id found!";
     private final ApplicationRepository applicationRepository;
 
 

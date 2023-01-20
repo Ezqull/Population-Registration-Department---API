@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Table(name = "application")
 public class Application extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "personal_data_id",
                 referencedColumnName = "id")
     private PersonalData personalData;

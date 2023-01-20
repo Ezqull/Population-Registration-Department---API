@@ -2,6 +2,7 @@ package bazy.projekt.app.controller;
 
 import bazy.projekt.app.model.CheckedIn;
 import bazy.projekt.app.service.CheckedInService;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,18 +40,19 @@ public class CheckedInController {
         return ResponseEntity.ok(checkedInService.getAllBeforeDate(date));
     }
 
-    @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<CheckedIn> updateCheckedIn(@RequestBody CheckedIn checkedIn){
+    @PutMapping(path = "/update/{id}", consumes="application/json")
+    public ResponseEntity<CheckedIn> updateCheckedIn(@RequestBody CheckedIn checkedIn, @PathVariable("id") Long id){
+        checkedIn.setId(id);
         return ResponseEntity.ok(checkedInService.updateData(checkedIn));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
     public ResponseEntity<CheckedIn> createCheckedIn(@RequestBody CheckedIn checkedIn){
-        return ResponseEntity.ok(checkedInService.createData(checkedIn));
+        return new ResponseEntity(checkedInService.createData(checkedIn), HttpStatusCode.valueOf(201));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteCheckedIn(@PathVariable("id") Long id){
-        return ResponseEntity.ok(checkedInService.deleteCheckedIn(id));
+        return new ResponseEntity(checkedInService.deleteCheckedIn(id), HttpStatusCode.valueOf(204));
     }
 }

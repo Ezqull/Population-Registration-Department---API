@@ -2,6 +2,7 @@ package bazy.projekt.app.controller;
 
 import bazy.projekt.app.model.Application;
 import bazy.projekt.app.service.ApplicationService;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,20 +49,20 @@ public class ApplicationController {
         return ResponseEntity.ok(applicationService.getAllApplicationsForUser(id));
     }
 
-    @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<Application> updateApplication(@RequestBody Application application){
-        System.out.println(application);
+    @PutMapping(path = "/update/{id}", consumes="application/json")
+    public ResponseEntity<Application> updateApplication(@RequestBody Application application, @PathVariable("id") Long id){
+        application.setId(id);
         return ResponseEntity.ok(applicationService.updateApplication(application));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
     public ResponseEntity<Application> createApplication(@RequestBody Application application){
         System.out.println(application);
-        return ResponseEntity.ok(applicationService.createApplication(application));
+        return new ResponseEntity(applicationService.createApplication(application), HttpStatusCode.valueOf(201));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteApplication(@RequestBody @PathVariable("id") Long id){
-        return ResponseEntity.ok(applicationService.deleteApplication(id));
+        return new ResponseEntity(applicationService.deleteApplication(id), HttpStatusCode.valueOf(204));
     }
 }

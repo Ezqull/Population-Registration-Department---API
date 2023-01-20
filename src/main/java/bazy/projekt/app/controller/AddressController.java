@@ -3,10 +3,12 @@ package bazy.projekt.app.controller;
 import bazy.projekt.app.model.Address;
 import bazy.projekt.app.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/address")
@@ -31,18 +33,19 @@ public class AddressController {
     }
 
 
-    @PutMapping(path = "/update", consumes="application/json")
-    public ResponseEntity<Address> updateAddress(@RequestBody Address address){
+    @PutMapping(path = "/update/{id}", consumes="application/json")
+    public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable("id") Long id){
+        address.setId(id);
         return ResponseEntity.ok(addressService.updateAddress(address));
     }
 
     @PostMapping(path = "/create", consumes="application/json")
     public ResponseEntity<Address> createAddress(@RequestBody Address address){
-        return ResponseEntity.ok(addressService.createAddress(address));
+        return new ResponseEntity(addressService.createAddress(address), HttpStatusCode.valueOf(201));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteAddress(@PathVariable("id") Long id){
-        return ResponseEntity.ok(addressService.deleteAddress(id));
+        return new ResponseEntity(addressService.deleteAddress(id), HttpStatusCode.valueOf(204));
     }
 }
