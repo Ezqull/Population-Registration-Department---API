@@ -1,8 +1,10 @@
 package bazy.projekt.app.service;
 
+import bazy.projekt.app.exception.RecordNotFoundException;
 import bazy.projekt.app.model.User;
 import bazy.projekt.app.repository.ApplicationRepository;
 import bazy.projekt.app.repository.UserRepository;
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private static final String USER_NOT_FOUND = "User with this email does not exist!";
+    private static final String USER_NOT_FOUND = "User not found!";
     private final UserRepository userRepository;
 
     @Autowired
@@ -25,11 +27,19 @@ public class UserService {
     }
 
     public User getUserById(Long id){
-        return userRepository.findById(id).orElseThrow();
+        try {
+            return userRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(USER_NOT_FOUND));
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public User getUserByEmail(String email){
-        return userRepository.findByEmail(email).orElseThrow();
+        try {
+            return userRepository.findByEmail(email).orElseThrow(() -> new RecordNotFoundException(USER_NOT_FOUND));
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public User createUser(User user){

@@ -1,9 +1,11 @@
 package bazy.projekt.app.service;
 
 
+import bazy.projekt.app.exception.RecordNotFoundException;
 import bazy.projekt.app.model.Application;
 import bazy.projekt.app.model.Result;
 import bazy.projekt.app.repository.ApplicationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +14,10 @@ import java.util.stream.Collectors;
 @Service
 public class ApplicationService {
 
-    private static final String NO_SUCH_USER = "No user with this id found!";
+    private static final String APPLICATION_NOT_FOUND = "Application not found!";
     private final ApplicationRepository applicationRepository;
 
-
+    @Autowired
     public ApplicationService(ApplicationRepository applicationRepository) {
         this.applicationRepository = applicationRepository;
     }
@@ -49,7 +51,11 @@ public class ApplicationService {
     }
 
     public Application getById(Long id){
-        return applicationRepository.findById(id).orElseThrow();
+        try {
+            return applicationRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(APPLICATION_NOT_FOUND));
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Application updateApplication(Application application){

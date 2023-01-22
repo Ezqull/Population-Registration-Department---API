@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,11 @@ public class PersonalDataController {
     @GetMapping(path = "/getAll")
     public ResponseEntity<List<PersonalData>> getAll(){
         return ResponseEntity.ok(personalDataService.getAll());
+    }
+
+    @GetMapping(path = "/countAfter", consumes="application/json")
+    public ResponseEntity<Integer> countDataBornAfterDate(@RequestBody LocalDate birthDate){
+        return ResponseEntity.ok(personalDataService.countDataAfterBirthDate(birthDate));
     }
 
     @GetMapping(path = "/getAllByLastName/{lastName}")

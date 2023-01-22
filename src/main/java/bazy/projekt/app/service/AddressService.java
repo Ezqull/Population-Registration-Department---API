@@ -1,5 +1,6 @@
 package bazy.projekt.app.service;
 
+import bazy.projekt.app.exception.RecordNotFoundException;
 import bazy.projekt.app.model.Address;
 import bazy.projekt.app.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import java.util.NoSuchElementException;
 
 @Service
 public class AddressService {
+
+    private static final String ADDRESS_NOT_FOUND = "Address not found!";
 
     private final AddressRepository addressRepository;
 
@@ -24,7 +27,11 @@ public class AddressService {
     }
 
     public Address getById(Long id){
-        return addressRepository.findById(id).orElseThrow();
+        try {
+            return addressRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(ADDRESS_NOT_FOUND));
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

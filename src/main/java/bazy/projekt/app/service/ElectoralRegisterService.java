@@ -1,6 +1,7 @@
 package bazy.projekt.app.service;
 
 
+import bazy.projekt.app.exception.RecordNotFoundException;
 import bazy.projekt.app.model.ElectoralRegister;
 import bazy.projekt.app.repository.ElectoralRegisterRepository;
 import bazy.projekt.app.repository.PersonalDataRepository;
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ElectoralRegisterService {
+
+    private static final String ELECTORAL_REGISTER_NOT_FOUND = "Electoral Register not found!";
+    private static final String PERSONAL_DATA_NOT_FOUND = "Personal Data not found!";
 
     private final ElectoralRegisterRepository electoralRegisterRepository;
     private final PersonalDataRepository personalDataRepository;
@@ -37,8 +41,11 @@ public class ElectoralRegisterService {
     }
 
     public ElectoralRegister getById(Long id){
-        Optional<ElectoralRegister> foundRegister = electoralRegisterRepository.findById(id);
-        return foundRegister.orElseThrow();
+        try {
+            return electoralRegisterRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(ELECTORAL_REGISTER_NOT_FOUND));
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public ElectoralRegister updateRegister(ElectoralRegister electoralRegister){
@@ -46,7 +53,15 @@ public class ElectoralRegisterService {
     }
 
     public ElectoralRegister createRegister(ElectoralRegister electoralRegister, Long id){
-        int yearsDifference = Period.between(personalDataRepository.findById(id).orElseThrow().getBirthDate(), LocalDate.now()).getYears();
+
+        int yearsDifference;
+
+        try {
+            yearsDifference = Period.between(personalDataRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(PERSONAL_DATA_NOT_FOUND)).getBirthDate(), LocalDate.now()).getYears();
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         if(yearsDifference >= 18)
             return electoralRegisterRepository.saveAndFlush(electoralRegister);
 
